@@ -1,11 +1,10 @@
-import './App.css';
-import LoginPage from './components/Login/LoginPage'
+import React from 'react';
+import Login from './components/Login/Login'; // Adjust the path as per your folder structure
 
 function App() {
   return (
     <div className="App">
-      <LoginPage />
-      {/* Other components and routes */}
+      <Login />
     </div>
   );
 }
