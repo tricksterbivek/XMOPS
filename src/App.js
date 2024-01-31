@@ -1,33 +1,17 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
-import Dashboard from './components/Dashboard/Dashboard';
-import DeploymentHistory from './components/DeploymentHistory/DeploymentHistory';
-import DeploymentOptions from './components/DeploymentOption/DeploymentOptions';
+import SignUp from './components/SignUp/SignUp';
+import VerifyAccount from './components/VerifiyAccount/verifyAccount'; // Import your VerifyAccount component
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = (success) => {
-    setIsAuthenticated(success);
-  };
-
   return (
     <Router>
-      <Switch>
-        <Route path="/login">
-          {isAuthenticated ? <Redirect to="/" /> : <Login onLogin={handleLogin} />}
-        </Route>
-        <Route path="/" exact>
-          {isAuthenticated ? <Dashboard /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/deployment-history">
-          {isAuthenticated ? <DeploymentHistory /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/deployment-options">
-          {isAuthenticated ? <DeploymentOptions /> : <Redirect to="/login" />}
-        </Route>
-      </Switch>
+      <Routes>
+        <Route exact path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/verifyAccount" element={<VerifyAccount />} /> // Add this line
+      </Routes>
     </Router>
   );
 }
