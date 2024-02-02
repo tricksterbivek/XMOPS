@@ -8,12 +8,12 @@ const SignUpPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const onSubmit = event => {
         event.preventDefault();
 
-      
+
         const attributeList = [
             new CognitoUserAttribute({
                 Name: 'name',
@@ -27,11 +27,12 @@ const SignUpPage = () => {
                 return;
             }
             console.log('User registration successful:', result);
-            navigate('/verifyAccount'); // Redirect after successful signup
+            navigate('/verifyAccount', { state: { email: email } });
+
         });
     };
 
- 
+
     return (
         <form onSubmit={onSubmit}>
             <input

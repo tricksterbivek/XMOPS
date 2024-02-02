@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
-import { CognitoUserPool } from 'amazon-cognito-identity-js';
 import UserPool from '../../auth/CognitoConfig';
-import './Login.css'
-import { Link } from 'react-router-dom';
+import './Login.css';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-   
+    const navigate = useNavigate(); // Initialize useNavigate
+
     const onSubmit = event => {
         event.preventDefault();
     
@@ -24,18 +25,19 @@ const LoginPage = () => {
         user.authenticateUser(authDetails, {
             onSuccess: data => {
                 console.log('onSuccess:', data);
-                alert("User Login SuccessFul")
+                // Redirect to dashboard page on successful login with useNavigate
+                navigate('/dashboard');
             },
             onFailure: err => {
                 console.error('onFailure:', err);
+                alert("Login Failed: " + err.message || JSON.stringify(err));
             },
             newPasswordRequired: data => {
                 console.log('newPasswordRequired:', data);
+                // Handle newPasswordRequired scenario, possibly redirect or prompt user for a new password
             }
         });
     };
-    
-
     return (
         <form onSubmit={onSubmit}>
             <input

@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Login/Login';
-import SignUp from './components/SignUp/SignUp';
-import VerifyAccount from './components/VerifiyAccount/verifyAccount'; // Import your VerifyAccount component
+
+const Login = lazy(() => import('./components/Login/Login'));
+const SignUp = lazy(() => import('./components/SignUp/SignUp'));
+const VerifyAccount = lazy(() => import('./components/VerifyAccount/verifyAccount'));
+const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'));
+const NotFound = lazy(() => import('./components/NotFound/NotFound')); // Assume you have a NotFound component
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/verifyAccount" element={<VerifyAccount />} /> // Add this line
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/verifyAccount" element={<VerifyAccount />} />
+        <Route path="*" element={<NotFound />} /> 
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
