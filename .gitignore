@@ -1,27 +1,25 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.js
 
-# testing
+# Testing
 /coverage
 /backend/node_modules/
 /terraform/.terraform/
 /terraform/.terraform.lock.hcl
 
-
-# production
+# Production
 /build
 
-# misc
+# Miscellaneous
 .DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# Package manager logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
