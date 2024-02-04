@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CognitoUserPool, CognitoUserAttribute } from 'amazon-cognito-identity-js';
+import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import userPool from '../../auth/CognitoConfig';
-
+import './SignUp.css'
 
 const SignUpPage = () => {
     const [email, setEmail] = useState('');
