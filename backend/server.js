@@ -1,17 +1,44 @@
 const express = require('express');
 const path = require('path');
+const { exec } = require('child_process');
 const app = express();
-const PORT = process.env.PORT || 3001;  
+const PORT = process.env.PORT || 3001;
 
-// Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
-// An endpoint for testing that the server is running
 app.get('/ping', (req, res) => {
   return res.send('pong');
 });
 
-// Handles any requests that don't match the ones above
+app.post('/api/action', (req, res) => {
+  console.log('Action button was clicked!');
+  res.json({ message: 'Action was successfully triggered' });
+});
+
+// Endpoint to deploy EC2 instance
+app.post('/api/deployEC2', (req, res) => {
+  exec('terraform apply -auto-approve', { cwd: '../terraform/' }, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return res.status(500).send({ message: 'Error executing Terraform apply' });
+    }
+    console.log(`stdout: ${stdout}`);
+    res.send({ message: 'EC2 Instance deployed successfully' });
+  });
+});
+
+// Endpoint to destroy EC2 instance
+app.post('/api/destroyEC2', (req, res) => {
+  exec('terraform destroy -auto-approve', { cwd: '../terraform/' }, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return res.status(500).send({ message: 'Error executing Terraform destroy' });
+    }
+    console.log(`stdout: ${stdout}`);
+    res.send({ message: 'EC2 Instance destroyed successfully' });
+  });
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });

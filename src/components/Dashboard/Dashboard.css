@@ -1,0 +1,30 @@
+/* Dashboard.css */
+
+/* Style for the dashboard container */
+.dashboard-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  /* Style for the heading */
+  .dashboard-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Style for the buttons */
+  .dashboard-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Hover effect for buttons */
+  .dashboard-button:hover {
+    background-color: #0056b3;
+  }
+  
