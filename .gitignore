@@ -7,9 +7,9 @@
 
 # testing
 /coverage
-backend/node_modules/
-terraform/.terraform/
-terraform/.terraform.lock.hcl
+/backend/node_modules/
+/terraform/.terraform/
+/terraform/.terraform.lock.hcl
 
 
 # production
