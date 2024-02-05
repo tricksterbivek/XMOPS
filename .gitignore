@@ -2,11 +2,12 @@
 /node_modules
 /.pnp
 .pnp.js
+/terraform
 
 # Testing
 /coverage
 /backend/node_modules/
-/terraform
+
 
 # Production
 /build

@@ -5,7 +5,7 @@ const Login = lazy(() => import('./components/Login/Login'));
 const SignUp = lazy(() => import('./components/SignUp/SignUp'));
 const VerifyAccount = lazy(() => import('./components/VerifyAccount/verifyAccount'));
 const Dashboard = lazy(() => import('./components/Dashboard/Dashboard'));
-const NotFound = lazy(() => import('./components/NotFound/NotFound')); // Assume you have a NotFound component
+const NotFound = lazy(() => import('./components/NotFound/NotFound')); 
 
 function App() {
   return (

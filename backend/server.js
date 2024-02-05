@@ -6,16 +6,16 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
-app.get('/ping', (req, res) => {
-  return res.send('pong');
-});
+// app.get('/ping', (req, res) => {
+//   return res.send('pong');
+// });
 
-app.post('/api/action', (req, res) => {
-  console.log('Action button was clicked!');
-  res.json({ message: 'Action was successfully triggered' });
-});
+// app.post('/api/action', (req, res) => {
+//   console.log('Action button was clicked!');
+//   res.json({ message: 'Action was successfully triggered' });
+// });
 
-// Endpoint to deploy EC2 instance
+
 app.post('/api/deployEC2', (req, res) => {
   exec('terraform apply -auto-approve', { cwd: '../terraform/' }, (error, stdout, stderr) => {
     if (error) {
@@ -27,7 +27,7 @@ app.post('/api/deployEC2', (req, res) => {
   });
 });
 
-// Endpoint to destroy EC2 instance
+
 app.post('/api/destroyEC2', (req, res) => {
   exec('terraform destroy -auto-approve', { cwd: '../terraform/' }, (error, stdout, stderr) => {
     if (error) {
