@@ -1,0 +1,2 @@
+terraform/**/*.tfstate filter=lfs diff=lfs merge=lfs -text
+path_to_other_large_files filter=lfs diff=lfs merge=lfs -text
