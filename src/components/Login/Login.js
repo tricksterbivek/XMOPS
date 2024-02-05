@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import UserPool from "../../auth/CognitoConfig";
@@ -125,7 +125,7 @@ const LoginPage = () => {
             Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
             
->>>>>>> 817a0e9d284b50eab56823892b5c11eded818f8a
+
         </form>
         {loading && (
           <div className="spinner-overlay">
