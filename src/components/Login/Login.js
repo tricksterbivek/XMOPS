@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 import UserPool from "../../auth/CognitoConfig";
@@ -65,6 +66,66 @@ const LoginPage = () => {
             type="password"
           />
           <button type="submit">Login</button>
+=======
+import React, { useState } from 'react';
+import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
+import UserPool from '../../auth/CognitoConfig';
+import './Login.css';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+
+const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
+
+    const onSubmit = event => {
+        event.preventDefault();
+    
+        const user = new CognitoUser({
+            Username: email,
+            Pool: UserPool
+        });
+    
+        const authDetails = new AuthenticationDetails({
+            Username: email,
+            Password: password
+        });
+    
+        user.authenticateUser(authDetails, {
+            onSuccess: data => {
+                console.log('onSuccess:', data);
+                // Redirect to dashboard page on successful login with useNavigate
+                navigate('/dashboard');
+            },
+            onFailure: err => {
+                console.error('onFailure:', err);
+                alert("Login Failed: " + err.message || JSON.stringify(err));
+            },
+            newPasswordRequired: data => {
+                console.log('newPasswordRequired:', data);
+                // Handle newPasswordRequired scenario, possibly redirect or prompt user for a new password
+            }
+        });
+    };
+    return (
+        <form onSubmit={onSubmit}>
+            <input
+                value={email}
+                onChange={event => setEmail(event.target.value)}
+                placeholder="Email"
+            />
+            <input
+                value={password}
+                onChange={event => setPassword(event.target.value)}
+                placeholder="Password"
+                type="password"
+            />
+             <button type="submit">Login</button>
+        <p>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+            
+>>>>>>> 817a0e9d284b50eab56823892b5c11eded818f8a
         </form>
         {loading && (
           <div className="spinner-overlay">
