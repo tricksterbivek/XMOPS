@@ -25,7 +25,7 @@ const LoginPage = () => {
         user.authenticateUser(authDetails, {
             onSuccess: data => {
                 console.log('onSuccess:', data);
-                // Redirect to dashboard page on successful login with useNavigate
+              
                 navigate('/dashboard');
             },
             onFailure: err => {
@@ -34,7 +34,6 @@ const LoginPage = () => {
             },
             newPasswordRequired: data => {
                 console.log('newPasswordRequired:', data);
-                // Handle newPasswordRequired scenario, possibly redirect or prompt user for a new password
             }
         });
     };
