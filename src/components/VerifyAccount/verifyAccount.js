@@ -5,7 +5,6 @@ import UserPool from '../../auth/CognitoConfig';
 import { useNavigate } from 'react-router-dom';
 const VerifyOTP = () => {
     const location = useLocation();
-    const location = useLocation();
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
     const navigate = useNavigate()
