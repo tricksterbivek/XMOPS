@@ -1,0 +1,30 @@
+.dashboard {
+    margin: 20px;
+    padding: 20px;
+}
+
+.dashboard-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.tile {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.tile h2 {
+    margin-top: 0;
+}
+
+.tile p {
+    font-size: 14px;
+}
+
+.user-info {
+    /* Additional styling specifically for the user info tile if needed */
+}
