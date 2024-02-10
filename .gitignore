@@ -3,7 +3,7 @@
 /.pnp
 .pnp.js
 /backend/node_modules
-/terraform/.terraform
+/terraform
 # testing
 /coverage
 /backend/node_modules/
