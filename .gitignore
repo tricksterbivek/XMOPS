@@ -2,9 +2,9 @@
 /node_modules
 /.pnp
 .pnp.js
-/terraform
-
-# Testing
+/backend/node_modules
+/terraform/.terraform
+# testing
 /coverage
 /backend/node_modules/
 
