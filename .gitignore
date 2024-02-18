@@ -6,10 +6,15 @@
 /terraform/*
 # testing
 /coverage
+<<<<<<< HEAD
 /backend/node_modules/
 
 
 # Production
+=======
+/backend
+# production
+>>>>>>> 91e3cad (remove backend)
 /build
 
 # Miscellaneous
