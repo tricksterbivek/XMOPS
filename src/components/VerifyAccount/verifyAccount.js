@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'; // Import useLocation
+import { useLocation } from 'react-router-dom'; 
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import UserPool from '../../auth/CognitoConfig';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ const VerifyOTP = () => {
     const location = useLocation();
     const [email, setEmail] = useState('');
     const [otp, setOtp] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
    
     useEffect(() => {
         if (location.state && location.state.email) {
@@ -29,7 +29,7 @@ const VerifyOTP = () => {
                 return;
             }
             alert("Verification successful!");
-            navigate("/")
+            navigate('/')
         });
     };
 

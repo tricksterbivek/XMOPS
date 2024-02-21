@@ -1,0 +1,116 @@
+/* General styling for the Deployment Options */
+.spinner-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+  }
+  
+  .logo-spinner {
+    width: 100px; /* Adjust the size if needed */
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+  }
+  
+  /* Rest of your CSS ... */
+  
+.deploymentOptions {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #444;
+    background-color: #f1f1f1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    min-height: 100vh;
+  }
+  
+  .deploymentOptions h2 {
+    color: #23282d;
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Styling for the button group */
+  .buttonGroup {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: stretch; /* Stretch buttons to fill the width */
+    gap: 1rem; /* Space between buttons */
+    width: 100%;
+    max-width: 320px; /* Max width of the buttons */
+  }
+  
+  .button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #21759b; /* WordPress button color */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+  }
+  
+  .button:hover {
+    background-color: #1e8cbe; /* Slightly lighter blue on hover */
+  }
+  
+  .button:disabled {
+    background-color: #a0a5aa; /* Disabled button color */
+    cursor: not-allowed;
+  }
+  
+  /* Spinner styling */
+  .spinner {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+  }
+
+  /* IP address and loading text styling */
+  p {
+    background-color: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+  }
+  
+  p a {
+    color: #21759b;
+    text-decoration: none;
+  }
+  
+  p a:hover {
+    text-decoration: underline;
+  }
+  
+  .loadingText {
+    font-style: italic;
+  }
+  
+  /* Include the Open Sans font */
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+  

@@ -1,14 +1,14 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css'
 const Dashboard = () => {
-    // In a real app, user information would likely come from state, props, or context.
-    // const { user } = useContext(UserContext);
+  
 
     const user = {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        // Other user details
+        name: 'TAP USER ',
+        email: 'TAP@swin.edu.au',
+       
     };
 
     return (
@@ -38,7 +38,7 @@ const Dashboard = () => {
                     <h2>User Information</h2>
                     <p><strong>Name:</strong> {user.name}</p>
                     <p><strong>Email:</strong> {user.email}</p>
-                    {/* Other user details here */}
+                  
                 </div>
             </div>
         </div>
