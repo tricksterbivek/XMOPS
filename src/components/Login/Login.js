@@ -6,6 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ClipLoader from 'react-spinners/ClipLoader';
+import logo from '../../logoWhole.png'
+
+import logoSpinner from '../../logo.png'; 
+
+
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -49,6 +55,9 @@ const LoginPage = () => {
 
   return (
     <>
+    
+      <div className="login-page-container">
+    <img src={logo} alt="Brand Logo" className="login-logo" />
       <ToastContainer position="bottom-center" />
       <div className="login-wrapper">
         <form onSubmit={onSubmit} className="login-container">
@@ -66,14 +75,16 @@ const LoginPage = () => {
           />
           <button type="submit">Login</button>
           {loading && (
-            <div className="spinner-overlay">
-              <ClipLoader color="#3498db" loading={loading} size={150} />
-            </div>
-          )}
+  <div className="spinner-overlay">
+    <img src={logoSpinner} alt="Loading..." className="logo-spinner" />
+  </div>
+)}
+
         </form>
         <p>
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
+      </div>
       </div>
     </>
   );

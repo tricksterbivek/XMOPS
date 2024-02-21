@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './DeploymentOption.css';
-
+import logoSpinner from '../../logo.png';
 const DeploymentOptions = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [ipAddress, setIpAddress] = useState('');
 
-  const handleDeployClick = () => {
-    setIsLoading(true); // Start loading
-    fetch('/api/deployWP', {
+  const deploy = (apiPath) => {
+    setIsLoading(true);
+    fetch(apiPath, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -19,16 +19,16 @@ const DeploymentOptions = () => {
     })
     .catch((error) => {
       console.error('Error:', error);
-      alert('Error deploying Wordpress');
+      alert(`Error during operation`);
     })
     .finally(() => {
       setIsLoading(false);
     });
   };
 
-  const handleDestroyClick = () => {
+  const destroy = (apiPath) => {
     setIsLoading(true);
-    fetch('/api/destroyWP', {
+    fetch(apiPath, {
       method: 'POST',
     })
     .then(response => response.json())
@@ -38,7 +38,7 @@ const DeploymentOptions = () => {
     })
     .catch((error) => {
       console.error('Error:', error);
-      alert('Error destroying Wordpress');
+      alert('Error during operation');
     })
     .finally(() => {
       setIsLoading(false);
@@ -48,14 +48,28 @@ const DeploymentOptions = () => {
   return (
     <div className="deploymentOptions">
       <h2>Deployment Options</h2>
-      <button className="button" onClick={handleDeployClick} disabled={isLoading}>
-        {isLoading ? <span className="spinner"></span> : "Deploy WordPress"}
-      </button>
-      <button className="button" onClick={handleDestroyClick} disabled={isLoading}>
-        {isLoading ? <span className="spinner"></span> : "Destroy WordPress"}
-      </button>
-      {ipAddress && <p>Access your WordPress site at: <a href={`http://${ipAddress}`} target="_blank" rel="noopener noreferrer">{ipAddress}</a></p>}
-      {isLoading && <p className="loadingText">Please wait...</p>}
+      <div className="buttonGroup">
+       
+        <button className="button" onClick={() => deploy('/api/deployLightSail')} disabled={isLoading}>
+          {isLoading ? <span className="spinner"></span> : "Deploy LightSail"}
+        </button>
+        <button className="button" onClick={() => destroy('/api/destroyLightSail')} disabled={isLoading}>
+          {isLoading ? <span className="spinner"></span> : "Destroy LightSail"}
+        </button>
+        <button className="button" onClick={() => deploy('/api/deployMonolith')} disabled={isLoading}>
+          {isLoading ? <span className="spinner"></span> : "Deploy Monolith"}
+        </button>
+        <button className="button" onClick={() => destroy('/api/destroyMonolith')} disabled={isLoading}>
+          {isLoading ? <span className="spinner"></span> : "Destroy Monolith"}
+        </button>
+      </div>
+      {ipAddress && <p>Access your site at: <a href={`http://${ipAddress}`} target="_blank" rel="noopener noreferrer">{ipAddress}</a></p>}
+      {isLoading && (
+  <div className="spinner-overlay">
+    <img src={logoSpinner} alt="Loading..." className="logo-spinner" />
+  </div>
+)}
+
     </div>
   );
 };

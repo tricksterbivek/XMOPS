@@ -1,30 +1,90 @@
+/* Dashboard overall styling */
 .dashboard {
-    margin: 20px;
-    padding: 20px;
-}
-
-.dashboard-tiles {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #444;
+    background-color: #f1f1f1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the content horizontally */
+  }
+  
+  .dashboard h1 {
+    color: #23282d;
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Tiles styling */
+  .dashboard-tiles {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.tile {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background: #f9f9f9;
-    text-align: center;
-}
-
-.tile h2 {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    width: 100%; /* Ensure the tiles container takes full width */
+    max-width: 1000px; /* Max width of the tiles container */
+    margin: 0 auto; /* Center the tiles container */
+  }
+  
+  .tile {
+    background-color: #ffffff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.13);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .tile:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  
+  .tile h2 {
+    color: #21759b;
     margin-top: 0;
-}
-
-.tile p {
-    font-size: 14px;
-}
-
-.user-info {
-    /* Additional styling specifically for the user info tile if needed */
-}
+    margin-bottom: 1rem;
+  }
+  
+  .tile p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  
+  .tile a {
+    display: inline-block;
+    background-color: #21759b;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tile a:hover {
+    background-color: #1e8cbe;
+  }
+  
+  /* User info tile styling */
+  .user-info {
+    /* If you want the user info to take up the full width on smaller screens */
+    grid-column: span 2; /* Span across two columns for larger screens */
+  }
+  
+  .user-info h2 {
+    color: #23282d;
+  }
+  
+  .user-info p {
+    margin: 0.5rem 0;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .user-info {
+      grid-column: span 1; /* Make the user info tile the same as others on smaller screens */
+    }
+  }
+  
+  /* Include the Open Sans font */
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+  

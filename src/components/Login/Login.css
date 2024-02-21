@@ -1,72 +1,125 @@
-/* LoginPage.css */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #f1f1f1; /* WordPress admin background color */
+  color: #444; /* WordPress admin default text color */
+}
+
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-logo {
+  width: 200px; /* Logo width similar to WordPress logo on login */
+  margin-bottom: 2rem; /* Adjust the space between logo and form */
+}
+
 .login-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh; /* Full viewport height */
-  background-color: #f4f7f6; /* Soft background color */
+  width: 100%;
+  max-width: 320px; /* Width similar to WordPress login form */
+  margin-top: -3rem; /* Adjust distance between logo and form */
 }
 
+/* Rest of your CSS ... */
+
+/* Login container/form styling */
 .login-container {
+  background-color: #ffffff;
+  padding: 40px 50px; /* Padding similar to WordPress login form */
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.13);
   width: 100%;
-  max-width: 320px; /* Max width for the form */
-  padding: 20px;
-  margin: 20px;
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 320px; /* Adjust based on your preference */
 }
 
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px; /* Space between input fields */
-  border: 1px solid #ccc;
+/* Style for input fields */
+input {
+  width: calc(100% - 24px); /* Account for padding and borders */
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd; /* Lighter border color for input fields */
   border-radius: 4px;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  box-sizing: border-box; /* Ensures padding does not affect overall width */
+  background-color: #fbfbfb; /* Slightly off-white background for input */
+  font-size: 14px; /* Standard font size for input */
 }
 
+input:focus {
+  border-color: #5b9dd9; /* Focus color similar to WordPress admin focus */
+  box-shadow: 0 0 2px rgba(30, 140, 190, .8); /* Adding a subtle shadow on focus */
+}
+
+/* Style for the login button */
 button {
   width: 100%;
-  padding: 10px;
-  background-color: #3498db; /* Button color */
-  color: #ffffff;
+  padding: 12px;
+  background-color: #21759b; /* WordPress button color */
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px; /* Make text easily readable */
+  font-size: 16px; /* Button text size */
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #2878a9; /* Slightly darker shade on hover */
+  background-color: #1e8cbe; /* Slightly lighter blue on hover */
 }
 
+/* Spinner overlay styling */
 .spinner-overlay {
-  position: fixed; /* Overlay to cover the entire screen */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(244, 247, 246, 0.8); /* Slightly transparent overlay */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 10;
 }
 
+.logo-spinner {
+  width: 100px; /* Set the size of your spinner logo */
+  animation: pulse 1.5s ease-in-out infinite;
+}
 
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+/* Styling for the sign-up prompt */
 p {
   text-align: center;
   margin-top: 20px;
+  font-size: 13px; /* Similar to WordPress prompt text size */
 }
 
 a {
-  color: #3498db;
-  text-decoration: none;
+  color: #21759b; /* Link color matches the button */
+  text-decoration: none; /* No underline for a cleaner look */
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Underline on hover for clarity */
 }

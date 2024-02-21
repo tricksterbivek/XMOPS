@@ -6,44 +6,69 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
-
-
-
-app.post('/api/deployWP', (req, res) => {
-  
-  exec('terraform apply -auto-approve', { cwd: '../terraform/' }, (error, stdout, stderr) => {
+const executeTerraformCommand = (command, cwd, successMessage, res) => {
+  exec(command, { cwd }, (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
-      return res.status(500).send({ message: 'Error executing Terraform apply' });
+      return res.status(500).send({ message: `Error executing Terraform command: ${stderr}` });
     }
     console.log(`stdout: ${stdout}`);
-  
-    exec('terraform output -json', { cwd: '../terraform/' }, (error, outputStdout, stderr) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        return res.status(500).send({ message: 'Error getting Terraform output' });
-      }
-  
-      try {
-        const outputs = JSON.parse(outputStdout);
-        const ip = outputs.instance_public_ip.value;
-        res.send({ message: 'EC2 Instance deployed successfully', ip: ip });
-      } catch (parseError) {
-        console.error(`Error parsing Terraform output: ${parseError}`);
-        res.status(500).send({ message: 'Error parsing Terraform output' });
-      }
-    });
+    if (command.includes('apply')) {
+     
+      exec('terraform output -json', { cwd }, (outputError, outputStdout, outputStderr) => {
+        if (outputError) {
+          console.error(`exec error: ${outputError}`);
+          return res.status(500).send({ message: `Error executing Terraform output command: ${outputStderr}` });
+        }
+        try {
+          const outputs = JSON.parse(outputStdout);
+          const ip = outputs.instance_ip.value; 
+          res.send({ message: successMessage, ip: ip });
+        } catch (parseError) {
+          console.error(`Error parsing Terraform output: ${parseError}`);
+          res.status(500).send({ message: 'Error parsing Terraform output' });
+        }
+      });
+    } else {
+      res.send({ message: successMessage });
+    }
   });
+};
+
+app.post('/api/deployMonolith', (req, res) => {
+  executeTerraformCommand(
+    'terraform apply -auto-approve',
+    '../../Terraform/monolith/',
+    'Monolith deployed successfully',
+    res
+  );
 });
-app.post('/api/destroyWP', (req, res) => {
-  exec('terraform destroy -auto-approve', { cwd: '../terraform/' }, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return res.status(500).send({ message: 'Error executing Terraform destroy' });
-    }
-    console.log(`stdout: ${stdout}`);
-    res.send({ message: 'Wordpress destroyed successfully' });
-  });
+
+app.post('/api/destroyMonolith', (req, res) => {
+  executeTerraformCommand(
+    'terraform destroy -auto-approve',
+    '../../Terraform/monolith/',
+    'Monolith destroyed successfully',
+    res
+  );
+});
+
+app.post('/api/deployLightSail', (req, res) => {
+  executeTerraformCommand(
+    'terraform apply -auto-approve',
+    '../LightSail/',
+    'LightSail deployed successfully',
+    res
+  );
+});
+
+app.post('/api/destroyLightSail', (req, res) => {
+  executeTerraformCommand(
+    'terraform destroy -auto-approve',
+    '../LightSail/',
+    'LightSail destroyed successfully',
+    res
+  );
 });
 
 app.get('*', (req, res) => {
