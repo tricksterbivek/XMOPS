@@ -9,7 +9,7 @@
 /test
 # Production
 /build
-
+/mono
 # Miscellaneous
 .DS_Store
 .env.local
