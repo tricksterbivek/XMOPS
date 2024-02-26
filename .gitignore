@@ -9,7 +9,8 @@
 /test
 # Production
 /build
-/mono
+/MonoLith
+/MicroService
 # Miscellaneous
 .DS_Store
 .env.local

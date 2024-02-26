@@ -62,6 +62,12 @@ const DeploymentOptions = () => {
         <button className="button" onClick={() => destroy('/api/destroyMonolith')} disabled={isLoading}>
           {isLoading ? <span className="spinner"></span> : "Destroy Monolith"}
         </button>
+        <button className="button" onClick={() => deploy('/api/deployMicroService')} disabled={isLoading}>
+          {isLoading ? <span className="spinner"></span> : "Deploy MicroService"}
+        </button>
+        <button className="button" onClick={() => destroy('/api/destroyMicroService')} disabled={isLoading}>
+          {isLoading ? <span className="spinner"></span> : "Destroy MicroService"}
+        </button>
       </div>
       {ipAddress && <p>Access your site at: <a href={`http://${ipAddress}`} target="_blank" rel="noopener noreferrer">{ipAddress}</a></p>}
       {isLoading && (

@@ -38,7 +38,7 @@ const executeTerraformCommand = (command, cwd, successMessage, res) => {
 app.post('/api/deployMonolith', (req, res) => {
   executeTerraformCommand(
     'terraform apply -auto-approve',
-    '../../Terraform/monolith/',
+    '../Monolith/',
     'Monolith deployed successfully',
     res
   );
@@ -47,12 +47,29 @@ app.post('/api/deployMonolith', (req, res) => {
 app.post('/api/destroyMonolith', (req, res) => {
   executeTerraformCommand(
     'terraform destroy -auto-approve',
-    '../../Terraform/monolith/',
+    '../Monolith/',
     'Monolith destroyed successfully',
     res
   );
 });
 
+app.post('/api/deployMicroService', (req, res) => {
+  executeTerraformCommand(
+    'terraform apply -auto-approve',
+    '../MicroService/',
+    'MicroService deployed successfully',
+    res
+  );
+});
+
+app.post('/api/destroyMicroService', (req, res) => {
+  executeTerraformCommand(
+    'terraform destroy -auto-approve',
+    '../MicroService/',
+    'MicroService destroyed successfully',
+    res
+  );
+});
 app.post('/api/deployLightSail', (req, res) => {
   executeTerraformCommand(
     'terraform apply -auto-approve',
