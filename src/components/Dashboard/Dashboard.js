@@ -1,44 +1,38 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Dashboard.css'
-const Dashboard = () => {
-  
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloud, faDatabase, faNetworkWired } from '@fortawesome/free-solid-svg-icons';
+import './Dashboard.css'; 
 
-    const user = {
-        name: 'TAP USER ',
-        email: 'TAP@swin.edu.au',
-       
+const Dashboard = () => {
+    const deployedCounts = {
+        lightsail: 5,
+        monolith: 3,
+        highlyAvailable: 7,
     };
 
     return (
         <div className="dashboard">
-            <h1>Dashboard</h1>
-            
-            <div className="dashboard-tiles">
-                <div className="tile">
-                    <h2>Deployment Options</h2>
-                    <p>Start a new deployment or configure existing ones.</p>
-                    <Link to="/deploy">Go to Deployment Options</Link>
+        <h1 className="dashboard-title">Dashboard</h1>
+            <div className="dashboard-cards">
+                {/* LightSail Card */}
+                <div className="card lightsail">
+                    <FontAwesomeIcon icon={faCloud} size="3x" />
+                    <h2>AWS LightSail</h2>
+                    <div className="deployment-count">Deployments: {deployedCounts.lightsail}</div>
                 </div>
-                
-                <div className="tile">
-                    <h2>Deployment History</h2>
-                    <p>Review the history of your deployments.</p>
-                    <Link to="/history">View Deployment History</Link>
+
+                {/* Monolith Card */}
+                <div className="card monolith">
+                    <FontAwesomeIcon icon={faDatabase} size="3x" />
+                    <h2>AWS monolith</h2>
+                    <div className="deployment-count">Deployments: {deployedCounts.monolith}</div>
                 </div>
-                
-                <div className="tile">
-                    <h2>Settings</h2>
-                    <p>Manage your account and application settings.</p>
-                    <Link to="/settings">Go to Settings</Link>
-                </div>
-                
-                <div className="tile user-info">
-                    <h2>User Information</h2>
-                    <p><strong>Name:</strong> {user.name}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
-                  
+
+                {/* Highly Available Card */}
+                <div className="card highly-available ">
+                    <FontAwesomeIcon icon={faNetworkWired} size="3x" />
+                    <h2>AWS highly-available </h2>
+                    <div className="deployment-count">Deployments: {deployedCounts.highlyAvailable}</div>
                 </div>
             </div>
         </div>

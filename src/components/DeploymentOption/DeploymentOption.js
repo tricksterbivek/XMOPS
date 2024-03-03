@@ -1,85 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloud, faDatabase, faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import './DeploymentOption.css';
-import logoSpinner from '../../logo.png';
-const DeploymentOptions = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [ipAddress, setIpAddress] = useState('');
 
-  const deploy = (apiPath) => {
-    setIsLoading(true);
-    fetch(apiPath, {
-      method: 'POST',
-    })
-    .then(response => response.json())
-    .then(data => {
-      alert(data.message);
-      if (data.ip) {
-        setIpAddress(data.ip);
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      alert(`Error during operation`);
-    })
-    .finally(() => {
-      setIsLoading(false);
-    });
-  };
+const DeploymentOption = () => {
+    return (
+        <div className="deployment-option">
+            <h1>Choose Your Deployment</h1>
 
-  const destroy = (apiPath) => {
-    setIsLoading(true);
-    fetch(apiPath, {
-      method: 'POST',
-    })
-    .then(response => response.json())
-    .then(data => {
-      alert(data.message);
-      setIpAddress(''); 
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      alert('Error during operation');
-    })
-    .finally(() => {
-      setIsLoading(false);
-    });
-  };
+            <div className="deployment-cards">
+                <div className="card lightsail">
+                    <FontAwesomeIcon icon={faCloud} size="3x" className="icon" />
+                    <h2>AWS LightSail</h2>
+                    <p>Optimized for WordPress, offering simplicity and cost efficiency.</p>
+                    <Link to="/lightsail" className="deploy-link">Deploy Now</Link>
+                </div>
 
-  return (
-    <div className="deploymentOptions">
-      <h2>Deployment Options</h2>
-      <div className="buttonGroup">
-       
-        <button className="button" onClick={() => deploy('/api/deployLightSail')} disabled={isLoading}>
-          {isLoading ? <span className="spinner"></span> : "Deploy LightSail"}
-        </button>
-        <button className="button" onClick={() => destroy('/api/destroyLightSail')} disabled={isLoading}>
-          {isLoading ? <span className="spinner"></span> : "Destroy LightSail"}
-        </button>
-        <button className="button" onClick={() => deploy('/api/deployMonolith')} disabled={isLoading}>
-          {isLoading ? <span className="spinner"></span> : "Deploy Monolith"}
-        </button>
-        <button className="button" onClick={() => destroy('/api/destroyMonolith')} disabled={isLoading}>
-          {isLoading ? <span className="spinner"></span> : "Destroy Monolith"}
-        </button>
-        <button className="button" onClick={() => deploy('/api/deployMicroService')} disabled={isLoading}>
-          {isLoading ? <span className="spinner"></span> : "Deploy MicroService"}
-        </button>
-        <button className="button" onClick={() => destroy('/api/destroyMicroService')} disabled={isLoading}>
-          {isLoading ? <span className="spinner"></span> : "Destroy MicroService"}
-        </button>
-      </div>
-      {ipAddress && <p>Access your site at: <a href={`http://${ipAddress}`} target="_blank" rel="noopener noreferrer">{ipAddress}</a></p>}
-      {isLoading && (
-  <div className="spinner-overlay">
-    <img src={logoSpinner} alt="Loading..." className="logo-spinner" />
-  </div>
-)}
+                <div className="card monolith">
+                    <FontAwesomeIcon icon={faDatabase} size="3x" className="icon" />
+                    <h2>Monolith</h2>
+                    <p>Traditional architecture, ideal for straightforward deployments.</p>
+                    <Link to="/monolith" className="deploy-link">Deploy Now</Link>
+                </div>
 
-    </div>
-  );
+                <div className="card highly-available">
+                    <FontAwesomeIcon icon={faNetworkWired} size="3x" className="icon" />
+                    <h2>Highly Available</h2>
+                    <p>Ensures uptime and scalability for your WordPress site.</p>
+                    <Link to="/high-available" className="deploy-link">Deploy Now</Link>
+                </div>
+            </div>
+        </div>
+    );
 };
 
-
-
-export default DeploymentOptions;
+export default DeploymentOption;

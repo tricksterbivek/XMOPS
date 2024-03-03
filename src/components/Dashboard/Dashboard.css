@@ -1,90 +1,75 @@
-/* Dashboard overall styling */
 .dashboard {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #444;
-    background-color: #f1f1f1;
-    padding: 2rem;
-    display: flex;
+  padding: 40px 40px 40px 250px; /* Adjust left padding to accommodate the sidebar */
+  background-color: #fffffff4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align to the start to accommodate for the sidebar */
+}
+
+.dashboard-title {
+  font-size: 2.5rem;
+  color: #4a4a4a;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  width: 100%; /* Ensure the title spans the full width */
+}
+
+.dashboard-cards {
+  display: flex;
+  justify-content: flex-start; /* Align cards to the start */
+  align-items: center; /* Center items vertically */
+  width: calc(100% - 250px); /* Adjust the width to account for the sidebar */
+  gap: 40px;
+}
+.card h2 { 
+  color :white
+} 
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 200px;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 0 0 auto; /* Do not grow or shrink */
+  width: 300px; /* Fixed width for each card */
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.366);
+}
+
+
+.card.lightsail { background-color: #4e8cff; }
+.card.monolith { background-color: #ff7e67; }
+.card.highly-available { background-color: #ffbc42; }
+
+/* ... Other styles ... */
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .card {
+    flex-basis: calc(50% - 40px); /* adjust size for medium screens */
+    max-width: calc(50% - 40px); /* adjust size for medium screens */
+  }
+}
+
+@media (max-width: 1200px) {
+  .dashboard {
+    padding: 20px; /* Adjust padding for smaller screens */
+  }
+  .dashboard-cards {
     flex-direction: column;
-    align-items: center; /* Centers the content horizontally */
+    width: auto; /* Full width for smaller screens */
   }
-  
-  .dashboard h1 {
-    color: #23282d;
-    font-size: 24px;
-    margin-bottom: 1.5rem;
+  .card {
+    width: auto; /* Full width for smaller screens */
+    margin-bottom: 20px;
   }
-  
-  /* Tiles styling */
-  .dashboard-tiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-    width: 100%; /* Ensure the tiles container takes full width */
-    max-width: 1000px; /* Max width of the tiles container */
-    margin: 0 auto; /* Center the tiles container */
-  }
-  
-  .tile {
-    background-color: #ffffff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.13);
-    transition: box-shadow 0.3s ease-in-out;
-  }
-  
-  .tile:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-  
-  .tile h2 {
-    color: #21759b;
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
-  
-  .tile p {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-  }
-  
-  .tile a {
-    display: inline-block;
-    background-color: #21759b;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .tile a:hover {
-    background-color: #1e8cbe;
-  }
-  
-  /* User info tile styling */
-  .user-info {
-    /* If you want the user info to take up the full width on smaller screens */
-    grid-column: span 2; /* Span across two columns for larger screens */
-  }
-  
-  .user-info h2 {
-    color: #23282d;
-  }
-  
-  .user-info p {
-    margin: 0.5rem 0;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .user-info {
-      grid-column: span 1; /* Make the user info tile the same as others on smaller screens */
-    }
-  }
-  
-  /* Include the Open Sans font */
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
-  
+}

@@ -1,0 +1,57 @@
+/* MonolithPage.css */
+.monolith-page {
+    padding: 40px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .header .icon {
+    font-size: 2rem;
+    color: #ff7e67;
+  }
+  
+  .content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .back-button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    background: linear-gradient(145deg, #bd94ff, #da7dff);
+    color :white;
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold; /* Make the text bold */
+    text-align: center;
+    text-decoration: none; /* Remove underline from text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    transition: all 0.3s ease; /* Transition for smooth hover effects */
+    display: inline-flex; /* Use flex to center the icon and text */
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center content horizontally */
+  }
+  
+  .back-button:hover {
+    background: linear-gradient(to right, #ffffff, #ffffff); /* Darker gradient on hover */
+    color:black;
+    box-shadow: 0 4px 10px rgba(189, 189, 189, 0.3); /* Larger shadow on hover */
+    transform: scale(1.05); /* Slightly scale up the button on hover */
+  }
+  
+  .back-button .fa-icon {
+    margin-right: 8px; /* Space between the icon and text */
+  }
+  

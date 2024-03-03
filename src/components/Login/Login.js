@@ -48,7 +48,7 @@ const LoginPage = () => {
       newPasswordRequired: data => {
         console.log('newPasswordRequired:', data);
         setLoading(false);
-        // Optionally handle newPasswordRequired scenario here
+       
       },
     });
   };

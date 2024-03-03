@@ -1,0 +1,79 @@
+/* DeploymentHistory.css */
+.deployment-history {
+    padding: 20px;
+    margin-left: 250px; /* Adjust this to match your sidebar's width */
+    font-family: Arial, sans-serif;
+  }
+  
+  .deployment-history h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: calc(100% - 40px); /* Adjust width based on padding */
+    border-collapse: collapse;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    background-color: #fff;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #007bff; /* A vibrant header color */
+    color: #fff;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5; /* Hover effect for rows */
+  }
+  
+  td.pass {
+    color: #28a745; /* Green for pass */
+  }
+  
+  td.fail {
+    color: #dc3545; /* Red for fail */
+  }
+  
+  @media (max-width: 768px) {
+    .deployment-history {
+      margin-left: 20px; /* Adjust for smaller screens if sidebar collapses */
+      padding: 20px 0;
+    }
+  
+    table, th, td {
+      display: block;
+      width: 100%;
+    }
+  
+    th, td {
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+  
+    td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      text-align: left;
+      font-weight: bold;
+    }
+  
+    tr {
+      margin-bottom: 15px;
+    }
+  
+    tr:hover {
+      background-color: transparent; /* Disable hover effect on mobile */
+    }
+  }
+  
