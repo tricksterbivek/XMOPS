@@ -13,7 +13,7 @@ AWS.config.update({
 const lightSail = new AWS.Lightsail();
 app.use(express.json());
 
-app.get('/api/regions', (req, res) => {
+app.get('/api/lightsail-regions', (req, res) => {
   lightSail.getRegions({}, (err, data) => {
     if (err) {
       console.log(err, err.stack); 
@@ -25,7 +25,7 @@ app.get('/api/regions', (req, res) => {
   });
 });
 
-app.get('/api/availabilityZones', (req, res) => {
+app.get('/api/lightsail-availabilityZones', (req, res) => {
   let region = req.query.region;
   let regionalLightSail = new AWS.Lightsail({
     region: region
@@ -50,7 +50,7 @@ app.get('/api/availabilityZones', (req, res) => {
  
 
 
-app.get('/api/blueprints', (req, res) => {
+app.get('/api/lightsail-blueprints', (req, res) => {
   let region = req.query.region;
   if (!region) {
     return res.status(400).send({ message: "Region is required" });
@@ -67,7 +67,7 @@ app.get('/api/blueprints', (req, res) => {
 });
 
 
-app.get('/api/bundles', (req, res) => {
+app.get('/api/lightsail-bundles', (req, res) => {
   let region = req.query.region;
   if (!region) {
     return res.status(400).send({ message: "Region is required" });

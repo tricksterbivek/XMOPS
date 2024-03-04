@@ -1,5 +1,5 @@
 .dashboard {
-  padding: 40px 40px 40px 250px; /* Adjust left padding to accommodate the sidebar */
+padding: 8px 15px 4px 25px;
   background-color: #fffffff4;
   min-height: 100vh;
   display: flex;
@@ -60,7 +60,7 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .dashboard {
     padding: 20px; /* Adjust padding for smaller screens */
   }

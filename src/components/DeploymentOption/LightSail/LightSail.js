@@ -21,16 +21,17 @@ const LightSailPage = () => {
     platform: "",
     blueprint: "wordpress",
     instancePlan: "",
+    bundles:""
   });
   useEffect(() => {
-    fetch("/api/regions")
+    fetch("/api/lightsail-regions")
       .then((response) => response.json())
       .then((data) => {
         console.log("This is the region data")
         console.log(data)
         setRegions(data.regions || []);
         if (data.regions && data.regions.length > 0) {
-          setSelectedRegion(data.regions[0].regionName); // Default to the first region
+          setSelectedRegion(data.regions[0].regionName);
           setInstanceDetails((prevDetails) => ({
             ...prevDetails,
             region: data.regions[0].regionName,
@@ -45,18 +46,27 @@ const LightSailPage = () => {
     const fetchRegionSpecificData = async () => {
       if (instanceDetails.region) {
         try {
-          const azResponse = await fetch(
-            `/api/availabilityZones?region=${instanceDetails.region}`
-          );
-          const azData = await azResponse.json();
-          setAvailabilityZones(azData.availabilityZones || []);
-
-          const bpResponse = await fetch( `/api/blueprints?region=${selectedRegion}`);
-          const bpData = await bpResponse.json();
-          setBlueprints(bpData.blueprints || []);
-
+          let azResponse = await fetch(
+            `/api/lightsail-availabilityZones?region=${instanceDetails.region}`
+          ).then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setAvailabilityZones(data.availabilityZones || []);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+          const bpResponse = await fetch( `/api/lightsail-blueprints?region=${selectedRegion}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setBlueprints(data.blueprints || []);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
           let bundleResponse = await fetch(
-            `/api/bundles?region=${selectedRegion}`
+            `/api/lightsail-bundles?region=${selectedRegion}`
           )
             .then((response) => response.json())
             .then((data) => {
@@ -66,12 +76,6 @@ const LightSailPage = () => {
             .catch((error) => {
               console.error("Error:", error);
             });
-          console.log(selectedRegion);
-          console.log("this is the bundles s"+bundles);
-          const bundleData = await bundleResponse.json();
-          
-          console.log("this is the bundle")
-          console.log(bundles)
         } catch (error) {
           console.error("Failed to fetch region-specific data:", error);
         }
@@ -168,6 +172,31 @@ const LightSailPage = () => {
                 {region.displayName}
               </option>
             ))}
+          </select>    <label htmlFor="availabilityZone ">Availability Zone :</label>
+          <select
+            name="instancePlan"
+            id="availabilityZone"
+            value={instanceDetails.availabilityZone}
+            onChange={handleInputChange}
+          >
+            {availabilityZones.map((az, index) => (
+              <option key={index} value={az.zoneName}>
+                {az.zoneName}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="platform ">Platform :</label>
+          <select
+            name="instancePlan"
+            id="platform"
+            value={instanceDetails.platform}
+            onChange={handleInputChange}
+          >
+            {blueprints.map((blueprint, index) => (
+              <option key={index} value={blueprint.blueprintId}>
+                {blueprint.blueprintId}
+              </option>
+            ))}
           </select>
           <label htmlFor="bundleId ">BundleId :</label>
           <select
@@ -183,7 +212,6 @@ const LightSailPage = () => {
             ))}
           </select>
         </div>
-        {/* Additional form elements for availabilityZone, platform, blueprint, and instancePlan can be added here */}
         <div className="buttonGroup">
           <button
             className="button"
