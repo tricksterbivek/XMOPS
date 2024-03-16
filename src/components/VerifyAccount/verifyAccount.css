@@ -1,0 +1,93 @@
+.verify-otp-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .verify-otp-logo {
+    width: 200px;
+    margin-bottom: 2rem;
+  }
+  
+  .verify-otp-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .verify-otp-form {
+    background-color: #ffffff;
+    padding: 40px 50px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.13);
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  input {
+    width: calc(100% - 24px);
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fbfbfb;
+    font-size: 14px;
+  }
+  
+  input:focus {
+    border-color: #5b9dd9;
+    box-shadow: 0 0 2px rgba(30, 140, 190, .8);
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #21759b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #1e8cbe;
+  }
+  
+  /* Reuse the spinner-overlay and logo-spinner styles from the login/signup CSS */
+  .spinner-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+  }
+  
+  .logo-spinner {
+    width: 100px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+  }

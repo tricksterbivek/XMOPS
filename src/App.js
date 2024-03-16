@@ -34,7 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/verify-account" element={<VerifyAccount />} />
+          <Route path="/verifyAccount" element={<VerifyAccount />} />
           <Route path="*" element={<NotFound />} />
 
           {/* Layout route */}

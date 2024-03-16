@@ -107,16 +107,31 @@ app.post('/api/destroyMonolith', (req, res) => {
 });
 
 app.post('/api/deployLightSail', express.json(), (req, res) => {
-  // const { region, availabilityZone, platform, blueprint, instancePlan } = req.body;
-  // const terraformApplyCommand = `terraform apply -auto-approve -var="region=${region}" -var="availability_zone=${availabilityZone}" -var="platform=${platform}" -var="blueprint=${blueprint}" -var="instance_plan=${instancePlan}"`;
+  const {
+    region,
+    instance_availability_zone,
+    instance_blueprintid,
+    instance_bundleid, 
+    static_ip,
+    static_ip_attachment,
+  } = req.body;
 
-  // executeTerraformCommand(
-  //   terraformApplyCommand,
-  //   '../LightSail/', // Make sure this path is correct
-  //   'LightSail deployed successfully',
-  //   res
-  // );
+  const terraformApplyCommand = `terraform apply -auto-approve ` +
+    `-var="region=${region}" ` +
+    `-var="instance_availability_zone=${instance_availability_zone}" ` +
+    `-var="instance_blueprintid=${instance_blueprintid}" ` +
+    `-var="instance_bundleid=${instance_bundleid}" ` +
+    `-var="static_ip=${static_ip}" ` +
+    `-var="static_ip_attachment=${static_ip_attachment}"`;
+
+  executeTerraformCommand(
+    terraformApplyCommand,
+    '../LightSail/',
+    'LightSail deployed successfully',
+    res
+  );
 });
+
 
 app.post('/api/destroyLightSail', (req, res) => {
   executeTerraformCommand(

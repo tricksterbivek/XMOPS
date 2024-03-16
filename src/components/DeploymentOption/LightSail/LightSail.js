@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import logoSpinner from "../../../logo.png";
-import "./LightSail.css"; // Assume you have a corresponding CSS file
+import "./LightSail.css";
 
 const LightSailPage = () => {
   const navigate = useNavigate();
@@ -21,8 +21,12 @@ const LightSailPage = () => {
     platform: "",
     blueprint: "wordpress",
     instancePlan: "",
-    bundles:""
   });
+  const handleDeploy = () => {
+console.log(instanceDetails)
+    //deploy("/api/deployLightSail", instanceDetails);
+  };
+  
   useEffect(() => {
     fetch("/api/lightsail-regions")
       .then((response) => response.json())
@@ -52,6 +56,10 @@ const LightSailPage = () => {
           .then((data) => {
             console.log(data);
             setAvailabilityZones(data.availabilityZones || []);
+            setInstanceDetails((prevDetails) => ({
+              ...prevDetails,
+              availabilityZone: data.availabilityZones[0]?.zoneName || "",
+            }));
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -61,6 +69,10 @@ const LightSailPage = () => {
           .then((data) => {
             console.log(data);
             setBlueprints(data.blueprints || []);
+            setInstanceDetails((prevDetails) => ({
+              ...prevDetails,
+              platform: data.blueprints[0]?.blueprintId || "",
+            }));
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -72,6 +84,10 @@ const LightSailPage = () => {
             .then((data) => {
               console.log(data);
               setBundles(data.bundles || []);
+              setInstanceDetails((prevDetails) => ({
+                ...prevDetails,
+                instancePlan: data.bundles[0]?.bundleId || "",
+              }));
             })
             .catch((error) => {
               console.error("Error:", error);
@@ -94,17 +110,17 @@ const LightSailPage = () => {
 
     if (name === "region") {
       setSelectedRegion(value);
-      // Optionally, trigger additional fetches here for availability zones, etc., based on the new region
+      
     }
   };
-  const deploy = (apiPath) => {
+  const deploy = (apiPath, instanceDetails) => {
     setIsLoading(true);
     fetch(apiPath, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ region: selectedRegion }),
+      body: JSON.stringify(instanceDetails),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -121,7 +137,7 @@ const LightSailPage = () => {
         setIsLoading(false);
       });
   };
-
+  
   const destroy = (apiPath) => {
     setIsLoading(true);
     fetch(apiPath, {
@@ -187,7 +203,7 @@ const LightSailPage = () => {
           </select>
           <label htmlFor="platform ">Platform :</label>
           <select
-            name="instancePlan"
+            name="platform"
             id="platform"
             value={instanceDetails.platform}
             onChange={handleInputChange}
@@ -215,7 +231,7 @@ const LightSailPage = () => {
         <div className="buttonGroup">
           <button
             className="button"
-            onClick={() => deploy("/api/deployLightSail")}
+            onClick={handleDeploy()}// deploy("/api/deployLightSail")}
             disabled={isLoading || !instanceDetails.region}
           >
             {isLoading ? <span className="spinner"></span> : "Deploy LightSail"}

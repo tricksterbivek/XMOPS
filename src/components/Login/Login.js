@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import UserPool from '../../auth/CognitoConfig';
-import './Login.css';
+import './Login.css'; // Ensure this is pointing to your updated CSS file
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ClipLoader from 'react-spinners/ClipLoader';
-import logo from '../../logoWhole.png'
-
-import logoSpinner from '../../logo.png'; 
-
-
-
+import logo from '../../logoWhole.png';
+import logoSpinner from '../../logo.png';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -35,20 +30,16 @@ const LoginPage = () => {
 
     user.authenticateUser(authDetails, {
       onSuccess: data => {
-        console.log('onSuccess:', data);
         navigate('/dashboard');
         setLoading(false);
         toast.success('Logged in successfully');
       },
       onFailure: err => {
-        console.error('onFailure:', err);
         setLoading(false);
         toast.error(`Login Failed: ${err.message || JSON.stringify(err)}`);
       },
       newPasswordRequired: data => {
-        console.log('newPasswordRequired:', data);
         setLoading(false);
-       
       },
     });
   };
@@ -56,35 +47,43 @@ const LoginPage = () => {
   return (
     <>
     
-      <div className="login-page-container">
-    <img src={logo} alt="Brand Logo" className="login-logo" />
-      <ToastContainer position="bottom-center" />
-      <div className="login-wrapper">
-        <form onSubmit={onSubmit} className="login-container">
-          <input
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-            placeholder="Email"
-            type="email"
-          />
-          <input
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-            placeholder="Password"
-            type="password"
-          />
-          <button type="submit">Login</button>
-          {loading && (
-  <div className="spinner-overlay">
-    <img src={logoSpinner} alt="Loading..." className="logo-spinner" />
-  </div>
-)}
-
-        </form>
-        <p>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </p>
-      </div>
+    <div className="login-page">
+        <ToastContainer position="bottom-center" />
+        {loading && (
+          <div className="spinner-overlay">
+            <img src={logoSpinner} alt="Loading..." className="logo-spinner" />
+          </div>
+        )}
+       
+        <div className="login-form">
+        <img src={logo} alt="Brand Logo" className="login-logo" />  
+          <form onSubmit={onSubmit}>
+            <div className="input-field">
+              <input
+                value={email}
+                onChange={event => setEmail(event.target.value)}
+                placeholder="Email"
+                type="email"
+                required
+              />
+            </div>
+            <div className="input-field">
+              <input
+                value={password}
+                onChange={event => setPassword(event.target.value)}
+                placeholder="Password"
+                type="password"
+                required
+              />
+            </div>
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? <img src={logoSpinner} alt="Loading..." className="button-spinner" /> : 'Login'}
+            </button>
+          </form>
+          <p>
+            Don't have an account? <Link to="/signup">Sign Up</Link>
+          </p>
+        </div>
       </div>
     </>
   );
