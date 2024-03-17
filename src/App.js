@@ -1,46 +1,34 @@
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { Suspense, lazy, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator, Button } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import awsconfig from './aws-exports'; // Adjust the path as necessary
 
 // Lazy load components
-const Login = lazy(() => import("./components/Login/Login"));
-const SignUp = lazy(() => import("./components/SignUp/SignUp"));
-const VerifyAccount = lazy(() =>
-  import("./components/VerifyAccount/verifyAccount")
-);
 const Dashboard = lazy(() => import("./components/Dashboard/Dashboard"));
-const DeploymentForm = lazy(() =>
-  import("./components/DeploymentOption/DeploymentOption")
-);
-const DeploymentHistory = lazy(() =>
-  import("./components/DeploymentHistory/DeploymentHistory")
-);
+const DeploymentForm = lazy(() => import("./components/DeploymentOption/DeploymentOption"));
+const DeploymentHistory = lazy(() => import("./components/DeploymentHistory/DeploymentHistory"));
 const Settings = lazy(() => import("./components/Settings/Settings"));
 const UserProfile = lazy(() => import("./components/UserProfile/UserProfile"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
-const Layout = lazy(() => import("./components/Sidebar/LayoutWithSidebar")); // Make sure this path is correct
-const LightSail = lazy(() =>
-  import("./components/DeploymentOption/LightSail/LightSail")
-);
-const Monolith = lazy(() =>
-  import("./components/DeploymentOption/Monolith/Monolith")
-);
-const HighAvailiblity = lazy(() =>
-  import("./components/DeploymentOption/HighAvailiblity/HighAvailiblity")
-);
-function App() {
+const Layout = lazy(() => import("./components/Sidebar/LayoutWithSidebar"));
+const LightSail = lazy(() => import("./components/DeploymentOption/LightSail/LightSail"));
+const Monolith = lazy(() => import("./components/DeploymentOption/Monolith/Monolith"));
+const HighAvailiblity = lazy(() => import("./components/DeploymentOption/HighAvailiblity/HighAvailiblity"));
+const SignIn = lazy(() => import("./components/Login/Login"));
+Amplify.configure(awsconfig);
+
+function App({ signOut, user }) {
   return (
+    
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/verifyAccount" element={<VerifyAccount />} />
-          <Route path="*" element={<NotFound />} />
-
-          {/* Layout route */}
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Layout signOut={signOut} user={user} />}>
             {/* Nested routes within Layout */}
-            <Route path="dashboard" element={<Dashboard />} />
+            <Route index element={<Dashboard />} />
+            <Route path = "dashboard" element={<Dashboard />} />
             <Route path="deployment-options" element={<DeploymentForm />} />
             <Route path="history" element={<DeploymentHistory />} />
             <Route path="settings" element={<Settings />} />
@@ -48,11 +36,14 @@ function App() {
             <Route path="lightsail" element={<LightSail />} />
             <Route path="monolith" element={<Monolith />} />
             <Route path="high-available" element={<HighAvailiblity />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="signIn" element={<SignIn />} />
           </Route>
         </Routes>
+        <Button variation="primary" onClick={signOut}>Sign out</Button>
       </Suspense>
     </Router>
   );
 }
 
-export default App;
+export default withAuthenticator(App);

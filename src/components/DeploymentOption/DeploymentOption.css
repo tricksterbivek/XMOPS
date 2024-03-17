@@ -75,7 +75,9 @@
       width: calc(50% - 20px); /* Adjust for tablet responsiveness */
   }
 }
-
+.card.lightsail { background-color: #4e8cff; }
+.card.monolith { background-color: #ff7e67; }
+.card.highly-available { background-color: #ffbc42; }
 @media (max-width: 768px) {
   .deployment-option {
       padding: 20px;

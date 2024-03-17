@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-xmops-dev-104636-authRole",
+      "UnauthRoleArn": "arn:aws:iam::997490402043:role/amplify-xmops-dev-104636-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::997490402043:role/amplify-xmops-dev-104636-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-xmops-dev-104636-deployment",
+      "UnauthRoleName": "amplify-xmops-dev-104636-unauthRole",
+      "StackName": "amplify-xmops-dev-104636",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:997490402043:stack/amplify-xmops-dev-104636/6de076e0-e3ef-11ee-9f6d-02992025d257",
+      "AmplifyAppId": "d2zvwpmdbvybno"
+    },
+    "categories": {
+      "auth": {
+        "xmopsa3c9815c": {}
+      }
+    }
+  }
+}

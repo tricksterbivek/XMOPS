@@ -1,0 +1,50 @@
+import React from 'react';
+
+const SelectDropdown = ({
+  label,
+  name,
+  value,
+  options,
+  onChange,
+  disabled,
+  optionKey = 'value',
+  optionValue = 'label',
+}) => {
+
+  const renderOptions = () => {
+    if (Array.isArray(options)) {
+      return options.map((option) => {
+        const optionValueText =
+          typeof optionValue === 'function'
+            ? optionValue(option)
+            : option[optionValue];
+        const optionKeyValue = option[optionKey];
+
+        return (
+          <option key={optionKeyValue} value={optionKeyValue}>
+            {optionValueText}
+          </option>
+        );
+      });
+    }
+
+    return options;
+  };
+
+  return (
+    <div className="select-dropdown">
+      <label htmlFor={name}>{label}</label>
+      <select
+        id={name}
+        name={name}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+      >
+        {renderOptions()}
+      </select>
+    </div>
+  );
+};
+
+export default SelectDropdown;

@@ -101,16 +101,31 @@ select:focus {
 }
 
 /* Spinner styles for loading indication */
-.spinner {
-  border: 4px solid #f3f3f3; /* Light grey border */
-  border-top: 4px solid #3498db; /* Blue border for the top, creates loading effect */
-  border-radius: 50%; /* Circular shape */
-  width: 20px; /* Size of the spinner */
-  height: 20px; /* Size of the spinner */
-  animation: spin 2s linear infinite; /* Spinning animation */
+.spinner-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1000; /* Ensure this is high enough to cover the whole screen */
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.logo-spinner {
+  width: 150px; /* Adjust based on your logo spinner size */
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% {
+  transform: scale(1);
+  opacity: 1;
+}
+50% {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
 }
